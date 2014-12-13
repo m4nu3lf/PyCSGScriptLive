@@ -1,0 +1,3 @@
+[submodule "ThirdParty/pyPolyCSG"]
+	path = ThirdParty/pyPolyCSG
+	url = https://github.com/m4nu3lf/pyPolyCSG.git

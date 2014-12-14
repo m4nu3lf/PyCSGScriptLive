@@ -1,9 +1,13 @@
 PyCSGScriptLive
 ==============
-PyCSGScriptLive is an environment composed of a language (based on python) and an editor, for CSG description.
+PyCSGScriptLive is an environment composed of a python DSL for CSG description and an interactive editor.
+The purpose of such an environment is to ease the CSG description that is often used to describe solid objects for physical simulations, such as electromagnetic fields simulations.
 
 #pyCSGScript
-Simple python library for CSG description.
+A simple python DSL for CSG description.
+It is a set of python classes to describe solid geometries, and methods to manipulate them. Geometries can be tagged with a material id meant to be used in physical simulations.
+The provided implementation is used to obtain a mesh representation for rendering but this implementation is meant to be changed (by extension or altogether) according to the final data representation that is desired.
+For instance another implementation could be provided to obtain a volume representation aimed at physical simulations.
 
 #pyCSGScriptLive
 An editor with OpenGL preview for pyCSGScript.

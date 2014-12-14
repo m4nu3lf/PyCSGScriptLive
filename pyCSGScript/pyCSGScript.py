@@ -302,7 +302,7 @@ class CSGObject(object):
         g = int(self.color[1] * 255.0)
         b = int(self.color[2] * 255.0) 
         a = int(self.color[3] * 255.0)
-        color_string = "#{0:X}{1:X}{2:X}{3:X}".format(r, g, b, a)
+        color_string = "#{0:02X}{1:02X}{2:02X}{3:02X}".format(r, g, b, a)
         
         transform_e = Et.Element("transform")
         for row in self.transform:

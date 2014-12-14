@@ -1,17 +1,1 @@
-<py_csg_script_data>
-  <csg_obj color="#FF00FF" filename="box.obj" mat="MAT01">
-    <transform>
-      <row>
-	<element>1.0</element><element>0.0</element><element>0.0</element><element>0.0</element>
-      </row>
-      <row>
-	<element>0.0</element><element>1.0</element><element>0.0</element><element>0.0</element>
-	</row>
-	<row>
-	  <element>0.0</element><element>0.0</element><element>1.0</element><element>0.0</element>
-	  </row>
-	  <row><element>0.0</element><element>0.0</element><element>0.0</element><element>1.0</element>
-	  </row>
-    </transform>
- </csg_obj>
-</py_csg_script_data>
+<py_csg_script_data><csg_obj color="#FF0000FF" filename="box.obj" mat="MAT01"><transform><row><element>1.0</element><element>0.0</element><element>0.0</element><element>0.0</element></row><row><element>0.0</element><element>1.0</element><element>0.0</element><element>0.0</element></row><row><element>0.0</element><element>0.0</element><element>1.0</element><element>0.0</element></row><row><element>0.0</element><element>0.0</element><element>0.0</element><element>1.0</element></row></transform></csg_obj></py_csg_script_data>

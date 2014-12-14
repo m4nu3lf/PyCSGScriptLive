@@ -12,7 +12,7 @@ slice = sphere * cube
 # Remove cube volume from sphere
 sphere -= cube
 
- # Delete the cube
+# Delete the cube
 del cube               
 
 # Translate the intersection

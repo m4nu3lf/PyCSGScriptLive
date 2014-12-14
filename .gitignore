@@ -1,4 +1,3 @@
-*.directory
 *.pyc
 *.obj
 *build/

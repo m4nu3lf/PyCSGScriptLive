@@ -1,4 +1,5 @@
 import sys
+import os
 import subprocess
 from threading import Timer
 from PyQt4.QtGui import QMainWindow, QFileDialog, QMessageBox
@@ -110,23 +111,24 @@ class MainWindow(QMainWindow):
         self._file_name = None
         if len(sys.argv) > 1:
             with open(sys.argv[1], "r") as f:
-                self._file_name = sys.argv[1]
+                self.file_name = sys.argv[1]
                 self.editor.setText(f.read())
                 self.editor.setModified(False)
         else:
             self._file_name = "Untitled"
         self._updateWindowTitle(False)
-    
+
     @property
     def file_name(self):
-        """The current file name, if changed the title of the window \
-        is chenged accordigly."""
+        """The current file name, if changed, the title of the window \
+        and the current working directory are chenged accordigly"""
         
         return self._file_name
     
     @file_name.setter
     def file_name(self, value):
         self._file_name = value
+        os.chdir(os.path.dirname(value))
         self._updateWindowTitle(self.editor.isModified())
         
     @property
@@ -212,7 +214,7 @@ class MainWindow(QMainWindow):
             with open(file_name, "r") as f:
                 self.editor.setText(f.read())
                 self.editor.setModified(False)
-                self.file_name = file_name
+                self.file_name = str(file_name)
         else:
             subprocess.call(["python", "./pyCSGScriptLive.py", file_name])
             return True
@@ -233,7 +235,7 @@ class MainWindow(QMainWindow):
         file_name = QFileDialog.getSaveFileName(caption="Save File As",
                                              filter="python script (*.py)")
         if file_name:
-            self.file_name = file_name
+            self.file_name = str(file_name)
             self.saveFile()
         
     def saveSettings(self):
@@ -506,9 +508,4 @@ class MainWindow(QMainWindow):
         self._code_check_timer = Timer(self.code_check_delay,
                                        self._requestCheck)
         self._code_check_timer.start()
-        
-        
-        
-        
-        
         

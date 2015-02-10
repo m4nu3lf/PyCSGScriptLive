@@ -183,24 +183,13 @@ class BaseCodeExecutor(object):
     class TermRequest():
         pass
     
-    def __init__(self, exec_stdout = None, exec_stderr = None):
+    def __init__(self, err_to_stdout = True):
         
-        # Execution stderr and stdout
-        default_output = StringIO()
-        if not exec_stdout:
-            exec_stdout = default_output
-        if not exec_stderr:
-            exec_stderr = default_output
+        #If the standard error is the same as the standard output
+        self._err_to_stdout = err_to_stdout
         
-        self.exec_stdout = exec_stdout
-        self.exec_stderr = exec_stderr
-        
-        # Execution raised exception
-        self.exec_exception = None
-        
-        # Execution dictionaries
-        self.exec_globals = {}
-        self.exec_locals = {}
+        # Set variables that reset every execution
+        self._reset_execution()
         
         # The previous executed code AST
         self._code_ast = ast.AST()
@@ -213,9 +202,6 @@ class BaseCodeExecutor(object):
         
         # True if a stop request has been performed
         self._requests_queue = Queue()
-        
-        # The index of the next node to be executed
-        self._next_node_index = 0
         
         # Cache for compiled AST nodes
         self._compiled_cache = []
@@ -373,16 +359,29 @@ class BaseCodeExecutor(object):
         sys.stderr = sys.__stderr__
             
     def _reset_execution(self):
-        # Clear the dicionaries with the execution state and sets
-        # the next_node_index to zero, for a new execution.
+        # Set the dicionaries with the execution state to
+        # empty ones. Set the next_node_index to zero,
+        # for a new execution.
         # Also notify that the execution will restart from the
         # beginning of the code.
         
+        # Execution dictionaries
         self.exec_globals = {}
         self.exec_locals = {}
-        self.exec_stdout.truncate(0)
-        self.exec_stderr.truncate(0)
+        
+        # Execution stderr and stdout
+        self.exec_stdout = StringIO()
+        if self._err_to_stdout:
+	  self.exec_stderr = self.exec_stdout
+	else:
+	  self.exec_stderr = StringIO()
+	
+	# The index of the next node to be executed
         self._next_node_index = 0
+        
+        # Execution raised exception
         self.exec_exception = None
+        
+        # Notify that  the execution will restart form the beginning
         self.on_execution_reset()
             

@@ -1,6 +1,7 @@
 import sys
 import os
 import subprocess
+from copy import deepcopy
 from threading import Timer
 from PyQt4.QtGui import QMainWindow, QFileDialog, QMessageBox
 from PyQt4.QtCore import QFileInfo, QSettings, QStringList
